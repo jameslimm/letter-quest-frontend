@@ -1,28 +1,40 @@
 *,
 *::after,
 *::before {
-  margin: 0;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
-.emoji-slider {
+.keyboard {
+  margin: 0 auto;
+  width: fit-content;
   padding: 1rem;
+  box-shadow: 0 0 3px black;
+  border-radius: 20px;
   display: flex;
-  overflow: scroll;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
 }
-.emoji {
-  margin: 1rem;
-  width: 200px;
-  height: 200px;
-  border: 1px solid black;
+
+.keyboard-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12vw;
-  border-radius: 50%;
-  box-shadow: 0 0 5px black;
-  filter: drop-shadow(0 0 10px rgb(172, 172, 172));
+}
+
+.keyboard-key,
+.keyboard-key-inactive {
+  padding: 1rem;
+  margin: 0.5rem;
+  box-shadow: 0 0 4px black;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.keyboard-key:hover {
+  background-color: aquamarine;
+}
+
+.keyboard-key-inactive {
+  visibility: hidden;
 }

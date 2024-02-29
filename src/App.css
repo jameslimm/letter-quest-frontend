@@ -3,6 +3,7 @@
 
 :root {
   --bg-color: rgb(189, 227, 254);
+  --questionWidthAndHeight: 350px;
 }
 
 *,
@@ -136,6 +137,7 @@ body {
 .question-slider {
   position: relative;
   overflow: hidden;
+  min-height: calc(var(--questionWidthAndHeight) + 50px);
 }
 
 .question-slider::after,
@@ -143,7 +145,7 @@ body {
   content: "";
   position: absolute;
   z-index: 1;
-  width: 200px;
+  width: 25vw;
 }
 
 .question-slider::after {
@@ -157,12 +159,14 @@ body {
 }
 
 .question {
+  padding: 1rem;
   position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
   transition: all 0.2s ease-in-out;
+  min-width: var(--questionWidthAndHeight);
 }
 
 .question-word {
@@ -173,6 +177,8 @@ body {
 }
 
 .question-emoji {
+  width: calc(var(--questionWidthAndHeight) - 75px);
+  height: calc(var(--questionWidthAndHeight) - 75px);
   font-size: 8rem;
   display: flex;
   align-items: center;

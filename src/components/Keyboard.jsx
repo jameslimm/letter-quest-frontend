@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
+import { useGameDispatch, useGameState } from "./GameContext";
 
-const Keyboard = ({ answer, question, handleLetterClick, handleAddPenalty }) => {
+const Keyboard = () => {
   const KEYS = ["qwertyuiop".split(""), "asdfghjkl".split(""), "zxcvbnm".split("")];
   const MAX_HINT_LEVEL = 3;
+
+  const { currentQuestion, questions } = useGameState();
+  const { question, answer } = questions[currentQuestion] || {};
+
+  const dispatch = useGameDispatch();
 
   const [hintLevel, setHintLevel] = useState(0);
   const [activeKeys, setActiveKeys] = useState([]);
@@ -11,6 +17,18 @@ const Keyboard = ({ answer, question, handleLetterClick, handleAddPenalty }) => 
     if (hintLevel >= MAX_HINT_LEVEL) return;
     setHintLevel(hintLevel + 1);
     handleAddPenalty(2);
+  };
+
+  const handleLetterClick = (letter) => {
+    if (answer === letter) {
+      dispatch({ type: "set_current_question", currentQuestion: currentQuestion + 1 });
+    } else {
+      dispatch({ type: "add_penalty", penalty: 1 });
+    }
+  };
+
+  const handleAddPenalty = (seconds) => {
+    dispatch({ type: "add_penalty", penalty: seconds });
   };
 
   useEffect(() => {

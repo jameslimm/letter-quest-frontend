@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@500&display=swap");
 
 :root {
   --bg-color: rgb(189, 227, 254);
@@ -186,4 +187,16 @@ body {
   box-shadow: 0 0 10px black;
   background-color: white;
   border-radius: 50%;
+}
+
+.stopwatch {
+  background-color: black;
+  color: yellow;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 2rem;
+  padding: 1rem;
+  width: fit-content;
 }

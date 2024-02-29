@@ -5,7 +5,7 @@ const Keyboard = () => {
   const KEYS = ["qwertyuiop".split(""), "asdfghjkl".split(""), "zxcvbnm".split("")];
   const MAX_HINT_LEVEL = 3;
 
-  const { currentQuestion, questions } = useGameState();
+  const { currentQuestion, questions, totalQuestions } = useGameState();
   const { question, answer } = questions[currentQuestion] || {};
 
   const dispatch = useGameDispatch();
@@ -21,6 +21,10 @@ const Keyboard = () => {
 
   const handleLetterClick = (letter) => {
     if (answer === letter) {
+      if (currentQuestion === totalQuestions - 1) {
+        dispatch({ type: "end_game" });
+        return;
+      }
       dispatch({ type: "set_current_question", currentQuestion: currentQuestion + 1 });
     } else {
       dispatch({ type: "add_penalty", penalty: 1 });

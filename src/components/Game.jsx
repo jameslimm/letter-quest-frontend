@@ -1,42 +1,27 @@
 import { useEffect } from "react";
-import { useGameDispatch } from "./GameContext";
+import { useGameDispatch, useGameState } from "./GameContext";
 
-import questionBank from "../model/questions.json";
+import { chooseQuestions } from "../model/utils";
 
 import Keyboard from "./Keyboard";
 import QuestionSlider from "./QuestionSlider";
+import Timer from "./Timer";
 
 const Game = () => {
   const dispatch = useGameDispatch();
-
-  // const [currentTime, setCurrentTime] = useState(0);
-  // useEffect(() => {
-  //   const intervalId = setTimeout(() => setCurrentTime(new Date().getTime() - startTime), 100);
-  //   return () => clearTimeout(intervalId);
-  // }, [currentTime, startTime]);
-
-  const chooseQuestions = (maxWordLength = 4) => {
-    const _qB = questionBank.filter((q) => q.word.length < maxWordLength);
-    _qB.sort((a, b) => (Math.random() < 0.5 ? -1 : 1));
-    _qB.splice(0, _qB.length - 10);
-
-    _qB.forEach((_q) => {
-      const wordArr = _q.word.split("");
-      const letterIdx = Math.floor(Math.random() * wordArr.length);
-
-      _q.answer = wordArr[letterIdx];
-      wordArr[letterIdx] = "_";
-      _q.question = wordArr.join("");
-    });
-    dispatch({ type: "set_questions", questions: _qB });
-  };
+  const { totalQuestions } = useGameState();
+  const MAX_WORD_LENGTH = 4;
 
   useEffect(() => {
-    chooseQuestions();
+    dispatch({
+      type: "set_questions",
+      questions: chooseQuestions(totalQuestions, MAX_WORD_LENGTH),
+    });
   }, []);
 
   return (
     <>
+      <Timer />
       <QuestionSlider />
       <Keyboard />
     </>

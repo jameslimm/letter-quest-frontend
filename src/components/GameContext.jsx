@@ -19,16 +19,38 @@ const reducer = (state, action) => {
     case "add_penalty":
       return {
         ...state,
-        penalty: state.penalty + action.penalty,
+        penaltyTime: state.penaltyTime + action.penalty,
+      };
+    case "set_game_status":
+      return {
+        ...state,
+        gameStatus: action.gameStatus,
+      };
+    case "start_new_game":
+      return {
+        ...state,
+        currentQuestion: 0,
+        gameStatus: 1,
+        startTime: new Date().getTime(),
+        endTime: 0,
+        penaltyTime: 0,
+      };
+    case "end_game":
+      return {
+        ...state,
+        gameStatus: 2,
+        endTime: new Date().getTime(),
       };
   }
 };
 
 const initialData = {
+  gameStatus: 0,
   questions: [],
   currentQuestion: 0,
-  startTime: new Date().getTime(),
-  currentTime: 0,
+  totalQuestions: 2,
+  startTime: 0,
+  endTime: 0,
   penaltyTime: 0,
 };
 

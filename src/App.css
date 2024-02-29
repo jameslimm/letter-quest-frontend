@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --bg-color: rgb(189, 227, 254);
+}
+
 *,
 *::after,
 *::before {
@@ -6,15 +13,92 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--bg-color);
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.countdown {
+  position: absolute;
+  z-index: 2;
+  background-color: black;
+  opacity: 0.8;
+  inset: 0 0 0 0;
+  text-align: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: countdown-overlay 3s forwards linear;
+}
+
+.countdown-number {
+  color: white;
+  position: absolute;
+  inset: 0 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50rem;
+  font-weight: 800;
+  opacity: 0;
+  animation: countdown-numbers 1s forwards linear;
+}
+
+.countdown-number:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+.countdown-number:nth-of-type(2) {
+  animation-delay: 1s;
+}
+
+.countdown-number:nth-of-type(3) {
+  animation-delay: 2s;
+}
+
+@keyframes countdown-numbers {
+  0% {
+    transform: rotateY(90deg);
+  }
+  1% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+    transform: rotateY(-90deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes countdown-overlay {
+  0% {
+    opacity: 0.8;
+  }
+  98% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .keyboard {
-  margin: 0 auto;
+  margin: 1rem auto;
   width: fit-content;
   padding: 1rem;
-  box-shadow: 0 0 3px black;
+  box-shadow: 0 0 5px black;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 }
 
 .keyboard-row {
@@ -23,12 +107,21 @@
 
 .keyboard-key,
 .keyboard-key-inactive {
+  width: 60px;
+  text-align: center;
   padding: 1rem;
   margin: 0.5rem;
+  border: 1px solid black;
   box-shadow: 0 0 4px black;
   border-radius: 10px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
   cursor: pointer;
+}
+
+.keyboard-hint {
+  width: fit-content;
+  padding: 1rem 5rem;
 }
 
 .keyboard-key:hover {
@@ -36,5 +129,55 @@
 }
 
 .keyboard-key-inactive {
-  visibility: hidden;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.question-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.question-slider::after,
+.question-slider::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+}
+
+.question-slider::after {
+  inset: 0 0 0 auto;
+  background: linear-gradient(to right, transparent, var(--bg-color));
+}
+
+.question-slider::before {
+  inset: 0 auto 0 0;
+  background: linear-gradient(to left, transparent, var(--bg-color));
+}
+
+.question {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease-in-out;
+}
+
+.question-word {
+  font-size: 4rem;
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  letter-spacing: 0.5rem;
+}
+
+.question-emoji {
+  font-size: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px black;
+  background-color: white;
+  border-radius: 50%;
 }

@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 
-const Keyboard = ({ answer, handleLetterClick }) => {
+const Keyboard = ({ answer, question, handleLetterClick, handleAddPenalty }) => {
   const KEYS = ["qwertyuiop".split(""), "asdfghjkl".split(""), "zxcvbnm".split("")];
   const MAX_HINT_LEVEL = 3;
 
   const [hintLevel, setHintLevel] = useState(0);
   const [activeKeys, setActiveKeys] = useState([]);
+
+  const giveAHint = () => {
+    if (hintLevel >= MAX_HINT_LEVEL) return;
+    setHintLevel(hintLevel + 1);
+    handleAddPenalty(2);
+  };
 
   useEffect(() => {
     // RUN WHEN THE ANSWER PROP CHANGES (i.e moving to a new question)
@@ -29,7 +35,7 @@ const Keyboard = ({ answer, handleLetterClick }) => {
       [...allKeys.slice(0, 8)],
       [...allKeys.slice(0, 3)],
     ]);
-  }, [answer]);
+  }, [answer, question]);
 
   return (
     <div className="keyboard">
@@ -57,10 +63,7 @@ const Keyboard = ({ answer, handleLetterClick }) => {
       })}
       {hintLevel < MAX_HINT_LEVEL && (
         <div className="keyboard-row">
-          <div
-            className="keyboard-key"
-            onClick={() => setHintLevel(hintLevel < MAX_HINT_LEVEL ? hintLevel + 1 : hintLevel)}
-          >
+          <div className="keyboard-key keyboard-hint" onClick={giveAHint}>
             Give me a hint
           </div>
         </div>

@@ -48,7 +48,7 @@ const initialData = {
   gameStatus: 0,
   questions: [],
   currentQuestion: 0,
-  totalQuestions: 2,
+  totalQuestions: 5,
   startTime: 0,
   endTime: 0,
   penaltyTime: 0,

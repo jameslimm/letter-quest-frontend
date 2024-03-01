@@ -1,4 +1,5 @@
 import { useGameState } from "./GameContext";
+import HighScoreTable from "./HighScoreTable";
 
 const ResultsScreen = () => {
   const { startTime, endTime, penaltyTime } = useGameState();
@@ -6,10 +7,15 @@ const ResultsScreen = () => {
 
   return (
     <>
-      <h1>Results</h1>
-      <p>
-        You completed the game in {resultsTime} seconds! (Including {penaltyTime} penalty seconds)
-      </p>
+      <div className="results-container">
+        <h1 className="logo-title">Letter Quest</h1>
+
+        <h2>Results</h2>
+        <p>
+          You completed the game in {resultsTime} seconds! (Including {penaltyTime} penalty seconds)
+        </p>
+        <HighScoreTable />
+      </div>
     </>
   );
 };

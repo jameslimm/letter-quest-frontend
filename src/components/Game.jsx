@@ -21,7 +21,13 @@ const Game = () => {
 
   return (
     <>
-      <Timer />
+      <div className="game-header">
+        <Timer />
+        <h1 class="logo-title">Letter Quest</h1>
+        <button onClick={() => dispatch({ type: "set_game_status", gameStatus: 0 })}>
+          Go Back
+        </button>
+      </div>
       <QuestionSlider />
       <Keyboard />
     </>

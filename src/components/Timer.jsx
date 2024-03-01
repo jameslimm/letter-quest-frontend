@@ -11,14 +11,9 @@ const Timer = () => {
   }, [currentTime]);
 
   console.log(currentTime, startTime);
-  const resultsTime = (currentTime - startTime) / 1000;
+  const resultsTime = (currentTime - startTime) / 1000 + penaltyTime;
 
-  return (
-    <div className="stopwatch">
-      {resultsTime.toFixed(2)}
-      {penaltyTime > 0 && ` + ${penaltyTime} penalty seconds`}
-    </div>
-  );
+  return <div className="stopwatch">{resultsTime.toFixed(2)}</div>;
 };
 
 export default Timer;

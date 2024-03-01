@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
 
 :root {
-  --bg-color: rgb(189, 227, 254);
+  --bg-color: rgb(0, 0, 0);
   --questionWidthAndHeight: 350px;
 }
 
@@ -24,6 +25,74 @@ body {
   position: relative;
   min-height: 100vh;
   min-width: 100vw;
+  color: white;
+}
+
+.splash-container,
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4rem;
+}
+
+.logo-title {
+  font-family: "Bungee Inline", sans-serif;
+  font-weight: 400;
+
+  background: linear-gradient(to right, #ff3d16 20%, #f7ff15 30%, #0505a8 70%, #10df17 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: titleAnim 2s ease-in-out infinite alternate;
+}
+
+.splash-title {
+  padding: 5rem 0;
+  filter: drop-shadow(0 0 20px white);
+  text-align: center;
+  line-height: 9rem;
+  font-size: 10rem;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  padding: 1rem;
+  margin: 1rem;
+  color: yellow;
+  background-color: transparent;
+  border: 5px dotted yellow;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  animation: startButtonPulse 0.5s ease-in-out infinite alternate;
+}
+
+.begin-button {
+  font-size: 3rem;
+}
+
+@keyframes startButtonPulse {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.01;
+  }
+}
+@keyframes titleAnim {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .countdown {
@@ -109,6 +178,7 @@ body {
 
 .keyboard-key,
 .keyboard-key-inactive {
+  color: black;
   width: 60px;
   text-align: center;
   padding: 1rem;
@@ -136,6 +206,7 @@ body {
 }
 
 .question-slider {
+  color: white;
   position: relative;
   overflow: hidden;
   min-height: calc(var(--questionWidthAndHeight) + 50px);
@@ -178,15 +249,24 @@ body {
 }
 
 .question-emoji {
+  color: black;
   width: calc(var(--questionWidthAndHeight) - 75px);
   height: calc(var(--questionWidthAndHeight) - 75px);
   font-size: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px black;
+  box-shadow: 0 0 15px white;
   background-color: white;
   border-radius: 50%;
+  text-shadow: 0 0 10px black;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 1px yellow;
 }
 
 .stopwatch {
@@ -199,4 +279,56 @@ body {
   font-size: 2rem;
   padding: 1rem;
   width: fit-content;
+}
+
+.high-scores {
+  color: black;
+  width: 500px;
+  border: 1px solid black;
+  text-align: center;
+  box-shadow: 0 0 5px black;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 2rem;
+  padding: 1rem;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+}
+
+.high-scores h3 {
+  font-size: 3rem;
+}
+.high-scores p {
+  margin-bottom: 2rem;
+}
+
+.high-score-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.75rem;
+}
+
+.high-score-line-position {
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.high-score-line-nickname {
+  margin-left: 1rem;
+  font-weight: 800;
+}
+
+.high-score-line-gametime {
+  background-color: black;
+  color: yellow;
+  padding: 5px;
+  margin-left: 2rem;
 }

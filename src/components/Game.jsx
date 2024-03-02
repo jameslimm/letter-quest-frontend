@@ -3,9 +3,9 @@ import { useGameDispatch, useGameState } from "./GameContext";
 
 import { chooseQuestions } from "../model/utils";
 
-import Keyboard from "./Keyboard";
 import QuestionSlider from "./QuestionSlider";
 import Timer from "./Timer";
+import GameKeyboard from "./GameKeyboard";
 
 const Game = () => {
   const dispatch = useGameDispatch();
@@ -21,15 +21,17 @@ const Game = () => {
 
   return (
     <>
-      <div className="game-header">
-        <Timer />
-        <h1 class="logo-title">Letter Quest</h1>
-        <button onClick={() => dispatch({ type: "set_game_status", gameStatus: 0 })}>
-          Go Back
-        </button>
-      </div>
-      <QuestionSlider />
-      <Keyboard />
+      <main>
+        <div className="game-header">
+          <Timer />
+          <h1 class="logo-title">Letter Quest</h1>
+          <button onClick={() => dispatch({ type: "set_game_status", gameStatus: 0 })}>
+            Go Back
+          </button>
+        </div>
+        <QuestionSlider />
+        <GameKeyboard />
+      </main>
     </>
   );
 };

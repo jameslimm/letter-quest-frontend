@@ -41,6 +41,11 @@ const reducer = (state, action) => {
         gameStatus: 2,
         endTime: new Date().getTime(),
       };
+    case "set_nickname":
+      return {
+        ...state,
+        nickName: action.nickName,
+      };
   }
 };
 
@@ -52,10 +57,13 @@ const initialData = {
   startTime: 0,
   endTime: 0,
   penaltyTime: 0,
+  nickName: "",
 };
 
 export const GameProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialData);
+
+  state.score = state.endTime > 0 ? state.endTime - state.startTime + state.penaltyTime * 1000 : 0;
 
   return (
     <GameStateContext.Provider value={state}>

@@ -10,7 +10,6 @@ const Timer = () => {
     return () => clearTimeout(intervalId);
   }, [currentTime]);
 
-  console.log(currentTime, startTime);
   const resultsTime = (currentTime - startTime) / 1000 + penaltyTime;
 
   return <div className="stopwatch">{resultsTime.toFixed(2)}</div>;

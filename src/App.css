@@ -4,8 +4,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
 
 :root {
-  --bg-color: rgb(0, 0, 0);
-  --questionWidthAndHeight: 350px;
+  --bg-color: rgb(30, 30, 30);
+  --fg-color: rgb(217, 217, 217);
+  --hl-color: yellow;
+  --questionWidthAndHeight: 270px;
 }
 
 *,
@@ -19,13 +21,17 @@
 body {
   background-color: var(--bg-color);
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
-  font-style: normal;
-  position: relative;
   min-height: 100vh;
   min-width: 100vw;
-  color: white;
+  color: var(--fg-color);
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .splash-container,
@@ -33,18 +39,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 h1 {
-  font-size: 4rem;
-  line-height: 4rem;
+  line-height: 2.5rem;
+  font-size: 1.25rem;
+  text-wrap: nowrap;
 }
 
 .logo-title {
   font-family: "Bungee Inline", sans-serif;
   font-weight: 400;
-
   background: linear-gradient(to right, #ff3d16 20%, #f7ff15 30%, #0505a8 70%, #10df17 80%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -58,24 +64,24 @@ h1 {
   filter: drop-shadow(0 0 20px white);
   text-align: center;
   line-height: 9rem;
-  font-size: 10rem;
+  font-size: 5rem;
 }
 
 button {
-  border: 0;
   outline: 0;
-  padding: 1rem;
-  margin: 1rem;
-  color: yellow;
+  padding: 0.5rem;
+  color: var(--hl-color);
   background-color: transparent;
-  border: 5px dotted yellow;
-  border-radius: 50px;
-  font-size: 1.5rem;
+  border: 3px dotted var(--hl-color);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1rem;
   animation: startButtonPulse 0.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 0.5rem var(--fg-color);
 }
 
 .begin-button {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 @keyframes startButtonPulse {
@@ -95,77 +101,14 @@ button {
   }
 }
 
-.countdown {
-  position: absolute;
-  z-index: 2;
-  background-color: black;
-  opacity: 0.8;
-  inset: 0 0 0 0;
-  text-align: center;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  animation: countdown-overlay 3s forwards linear;
-}
-
-.countdown-number {
-  color: white;
-  position: absolute;
-  inset: 0 0 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 50rem;
-  font-weight: 800;
-  opacity: 0;
-  animation: countdown-numbers 1s forwards linear;
-}
-
-.countdown-number:nth-of-type(1) {
-  animation-delay: 0s;
-}
-
-.countdown-number:nth-of-type(2) {
-  animation-delay: 1s;
-}
-
-.countdown-number:nth-of-type(3) {
-  animation-delay: 2s;
-}
-
-@keyframes countdown-numbers {
-  0% {
-    transform: rotateY(90deg);
-  }
-  1% {
-    opacity: 1;
-  }
-  99% {
-    opacity: 1;
-    transform: rotateY(-90deg);
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes countdown-overlay {
-  0% {
-    opacity: 0.8;
-  }
-  98% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+/* KEYBOARD */
 
 .keyboard {
-  margin: 1rem auto;
-  width: fit-content;
-  padding: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0.2rem;
   box-shadow: 0 0 5px black;
-  border-radius: 20px;
+  border-radius: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,25 +122,21 @@ button {
 .keyboard-key,
 .keyboard-key-inactive {
   color: black;
-  width: 60px;
   text-align: center;
-  padding: 1rem;
-  margin: 0.5rem;
+  width: 1.8rem;
+  padding: 0.25rem;
+  margin: 0.25rem;
   border: 1px solid black;
   box-shadow: 0 0 4px black;
-  border-radius: 10px;
-  font-size: 1.5rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
 }
 
 .keyboard-hint {
   width: fit-content;
-  padding: 1rem 5rem;
-}
-
-.keyboard-key:hover {
-  background-color: aquamarine;
+  padding: 0.5rem 3rem;
 }
 
 .keyboard-key-inactive {
@@ -205,11 +144,13 @@ button {
   pointer-events: none;
 }
 
+/* QUESTION SLIDER */
+
 .question-slider {
   color: white;
   position: relative;
   overflow: hidden;
-  min-height: calc(var(--questionWidthAndHeight) + 50px);
+  min-height: calc(var(--questionWidthAndHeight) + 20px);
 }
 
 .question-slider::after,
@@ -217,7 +158,7 @@ button {
   content: "";
   position: absolute;
   z-index: 1;
-  width: 25vw;
+  width: 20vw;
 }
 
 .question-slider::after {
@@ -252,7 +193,7 @@ button {
   color: black;
   width: calc(var(--questionWidthAndHeight) - 75px);
   height: calc(var(--questionWidthAndHeight) - 75px);
-  font-size: 8rem;
+  font-size: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,31 +207,27 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 1px yellow;
+  padding: 0.5rem;
+  box-shadow: 0 2px 3px yellow;
 }
 
 .stopwatch {
-  background-color: black;
   color: yellow;
   font-family: "Kode Mono", monospace;
-  font-optical-sizing: auto;
   font-weight: 500;
-  font-style: normal;
-  font-size: 2rem;
-  padding: 1rem;
-  width: fit-content;
+  font-size: 1.2rem;
 }
 
 .high-scores {
   color: black;
-  width: 500px;
+  width: fit-content;
   border: 1px solid black;
   text-align: center;
   box-shadow: 0 0 5px black;
   background-color: white;
   border-radius: 20px;
   font-size: 2rem;
-  padding: 1rem;
+  padding: 1rem 3rem;
   font-family: "Kode Mono", monospace;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -303,9 +240,26 @@ button {
   margin-bottom: 2rem;
 }
 
+.high-score-line-new {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.75rem;
+  animation: newHighScore 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes newHighScore {
+  from {
+    background-color: #ffff00;
+  }
+  to {
+    background-color: #ffbf00;
+  }
+}
+
 .high-score-line {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 0.75rem;
 }
@@ -331,4 +285,139 @@ button {
   color: yellow;
   padding: 5px;
   margin-left: 2rem;
+}
+
+.enter-nickname {
+  display: flex;
+}
+
+.enter-nickname .letter,
+.enter-nickname .letter-editing {
+  font-size: 2rem;
+  padding: 1rem;
+  border: 1px solid red;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.enter-nickname .letter-editing {
+  border: 1px solid yellow;
+  animation: animLetterEditing 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes animLetterEditing {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.2;
+  }
+}
+
+/* LOADING SPINNER */
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #000000;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #000000 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* RESPONSIVE */
+
+@media screen and (min-width: 450px) {
+  :root {
+    --questionWidthAndHeight: 350px;
+  }
+  .question-emoji {
+    font-size: 8rem;
+  }
+
+  .keyboard-key,
+  .keyboard-key-inactive {
+    width: 2.3rem;
+    padding: 0.25rem;
+    margin: 0.25rem;
+    font-size: 1.5rem;
+  }
+  .keyboard-hint {
+    width: fit-content;
+    padding: 0.5rem 3rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .stopwatch {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  :root {
+    --questionWidthAndHeight: 500px;
+  }
+  .splash-title {
+    font-size: 10rem;
+  }
+  .begin-button {
+    font-size: 4rem;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+
+  .keyboard {
+    width: fit-content;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  .question-emoji {
+    font-size: 12rem;
+  }
+  .keyboard-key,
+  .keyboard-key-inactive {
+    width: 3.5rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 2rem;
+  }
+  .keyboard-hint {
+    width: fit-content;
+    padding: 0.5rem 3rem;
+  }
+  h1 {
+    font-size: 2.8rem;
+  }
+  .stopwatch {
+    font-size: 2.3rem;
+  }
 }

@@ -1,51 +1,32 @@
 import { useEffect, useState } from "react";
 import { useGameState } from "./GameContext";
+import { getHighScores } from "../modules/api";
 
 const HighScoreTable = () => {
-  const API_ENDPOINT = "http://localhost:5000/results";
+  const MAX_HIGH_SCORES = 20;
 
   const [highScores, setHighScores] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const { nickName, score } = useGameState();
 
   useEffect(() => {
-    // do a fetch call to the server to get the high scores
-    const getResults = async () => {
-      setIsLoading(true);
-      setIsError(false);
-      try {
-        const results = await fetch(API_ENDPOINT);
-        const data = await results.json();
-        setHighScores(data);
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        // do something in all cases
-        setIsLoading(false);
-      }
-    };
-    getResults();
+    (async () => {
+      const highScores = await getHighScores();
+      if (highScores.data) setHighScores(highScores.data);
+      if (highScores.error) setIsError(true);
+      setIsLoading(false);
+    })();
   }, []);
 
-  useEffect(() => {
-    // is this game result included in the results from the server?
-    console.log("HERE");
-    const resIndex = highScores.findIndex(
-      (hs) => hs.gametime === score && hs.nickname === nickName
-    );
-    if (resIndex !== -1) {
-      console.log("found it");
-      return;
-    }
-
-    const _highScores = [...highScores, { id: -1, gametime: score, nickname: nickName }];
-    _highScores.sort((a, b) => a.gametime - b.gametime);
-    _highScores.splice(0, _highScores.length - 10);
-
-    setHighScores(_highScores);
-  }, [highScores, nickName, score]);
+  // add the nickname and score to the list of high scores to be shown.
+  const highScoresView =
+    highScores && highScores.length > 0
+      ? [...highScores, { gametime: score, nickname: nickName, isNew: true }]
+      : [];
+  highScoresView.sort((a, b) => a.gametime - b.gametime);
+  highScoresView.splice(0, highScoresView.length - MAX_HIGH_SCORES);
 
   return (
     <div className="high-scores">
@@ -60,10 +41,9 @@ const HighScoreTable = () => {
         </div>
       )}
       {isError && <p>Error Loading Data.</p>}
-      {highScores &&
-        highScores.map((hs, i) => {
-          const isThisGame = hs.gametime === score && hs.nickname === nickName;
-          const _class = isThisGame ? "high-score-line-new" : "high-score-line";
+      {highScoresView &&
+        highScoresView.map((hs, i) => {
+          const _class = hs.isNew ? "high-score-line-new" : "high-score-line";
           return (
             <div key={i} className={_class}>
               <div className="high-score-line-position">{i + 1}</div>

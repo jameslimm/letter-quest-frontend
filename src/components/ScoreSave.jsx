@@ -1,42 +1,19 @@
 import { useEffect, useState } from "react";
 import Keyboard from "./Keyboard";
 import { useGameDispatch, useGameState } from "./GameContext";
+import { saveScore } from "../modules/api";
 
 const ScoreSave = () => {
-  const API_ENDPOINT = "http://localhost:5000/results";
   const [nickNameEdit, setNickNameEdit] = useState(["", "", ""]);
-
   const [editingIndex, setEditingIndex] = useState(0);
-  const [isEditing, setIsEditing] = useState(true);
 
   const dispatch = useGameDispatch();
+
   const { nickName, score } = useGameState();
-
-  const saveScore = async () => {
-    const postOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ gametime: score, nickname: nickName }),
-    };
-
-    try {
-      const response = await fetch(API_ENDPOINT, postOptions);
-      if (!response.ok) throw Error("Save failed.");
-    } catch (e) {
-      console.log(e);
-    } finally {
-      // something here
-    }
-
-    console.log(nickName, score);
-  };
 
   useEffect(() => {
     if (nickName !== "") {
-      setIsEditing(false);
-      saveScore();
+      saveScore(score, nickName);
     }
   }, [nickName]);
 
@@ -53,15 +30,7 @@ const ScoreSave = () => {
     }
   };
 
-  if (!isEditing) {
-    return (
-      <>
-        <h3>Well done {nickName}, you got a score of ....</h3>
-      </>
-    );
-  }
-
-  if (isEditing) {
+  if (nickName === "") {
     return (
       <>
         <h2>Save Your Score</h2>

@@ -1,6 +1,6 @@
-import questionBank from "./questions.json";
+import questionBank from "../data/questions.json";
 
-export const chooseQuestions = (totalQuestions, maxWordLength = 4) => {
+export const chooseQuestions = (totalQuestions, maxWordLength = 7) => {
   const _qB = questionBank.filter((q) => q.word.length < maxWordLength);
   _qB.sort((a, b) => (Math.random() < 0.5 ? -1 : 1));
   _qB.splice(0, _qB.length - totalQuestions);

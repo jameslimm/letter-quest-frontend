@@ -4,10 +4,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
 
 :root {
-  --bg-color: rgb(30, 30, 30);
-  --fg-color: rgb(217, 217, 217);
-  --hl-color: yellow;
-  --questionWidthAndHeight: 270px;
+  --bg-color: rgb(5, 3, 35);
+  --fg-color: rgb(228, 226, 226);
+  --hl-color: rgb(255, 243, 19);
+  --questionWidthAndHeight: 250px;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 *,
@@ -22,18 +26,17 @@ body {
   background-color: var(--bg-color);
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 100dvh;
   color: var(--fg-color);
 }
 
 main {
-  height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
-
 .splash-container,
 .results-container {
   display: flex;
@@ -81,7 +84,7 @@ button {
 }
 
 .begin-button {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 @keyframes startButtonPulse {
@@ -101,6 +104,11 @@ button {
   }
 }
 
+.results_summary {
+  text-align: center;
+  font-size: 1.25rem;
+  margin: 1rem;
+}
 /* KEYBOARD */
 
 .keyboard {
@@ -147,6 +155,7 @@ button {
 /* QUESTION SLIDER */
 
 .question-slider {
+  width: 100%;
   color: white;
   position: relative;
   overflow: hidden;
@@ -183,7 +192,7 @@ button {
 }
 
 .question-word {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-family: "Permanent Marker", cursive;
   font-weight: 400;
   letter-spacing: 0.5rem;
@@ -204,6 +213,7 @@ button {
 }
 
 .game-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -219,32 +229,35 @@ button {
 }
 
 .high-scores {
+  margin-top: 2rem;
+  padding: 1rem;
   color: black;
-  width: fit-content;
-  border: 1px solid black;
   text-align: center;
-  box-shadow: 0 0 5px black;
   background-color: white;
-  border-radius: 20px;
-  font-size: 2rem;
-  padding: 1rem 3rem;
+  font-size: 1.5rem;
   font-family: "Kode Mono", monospace;
   font-optical-sizing: auto;
   font-weight: 500;
 }
 
 .high-scores h3 {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .high-scores p {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
+.high-score-line,
 .high-score-line-new {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.75rem;
+  margin: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 7px;
+}
+
+.high-score-line-new {
   animation: newHighScore 0.5s ease-in-out infinite alternate;
 }
 
@@ -255,13 +268,6 @@ button {
   to {
     background-color: #ffbf00;
   }
-}
-
-.high-score-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.75rem;
 }
 
 .high-score-line-position {
@@ -362,6 +368,12 @@ button {
     font-size: 8rem;
   }
 
+  .high-scores {
+    margin-top: 2rem;
+    padding: 1rem 4rem;
+    font-size: 1.7rem;
+  }
+
   .keyboard-key,
   .keyboard-key-inactive {
     width: 2.3rem;
@@ -389,9 +401,15 @@ button {
     font-size: 10rem;
   }
   .begin-button {
-    font-size: 4rem;
+    font-size: 2.5rem;
     padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .high-scores {
     margin-top: 2rem;
+    padding: 1rem 6rem;
+    font-size: 2rem;
   }
 
   .keyboard {

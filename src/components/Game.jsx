@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useGameDispatch, useGameState } from "./GameContext";
 
-import { chooseQuestions } from "../model/utils";
+import { chooseQuestions } from "../modules/utils";
 
 import QuestionSlider from "./QuestionSlider";
 import Timer from "./Timer";
@@ -10,7 +10,7 @@ import GameKeyboard from "./GameKeyboard";
 const Game = () => {
   const dispatch = useGameDispatch();
   const { totalQuestions } = useGameState();
-  const MAX_WORD_LENGTH = 4;
+  const MAX_WORD_LENGTH = 6;
 
   useEffect(() => {
     dispatch({

@@ -3,25 +3,29 @@ import HighScoreTable from "./HighScoreTable";
 import ScoreSave from "./ScoreSave";
 
 const ResultsScreen = () => {
-  const { startTime, endTime, penaltyTime } = useGameState();
-  const resultsTime = (endTime - startTime) / 1000 + penaltyTime;
+  const { nickName, score, penaltyTime } = useGameState();
   const dispatch = useGameDispatch();
   return (
     <>
-      <div className="results-container">
+      <main>
         <h1 className="logo-title">Letter Quest</h1>
 
+        <div className="results_summary">
+          <h2>Well Done {nickName !== "" ? nickName : "Player"}!</h2>
+          <p>
+            You completed the game in {(score / 1000).toFixed(2)} seconds (including {penaltyTime}{" "}
+            penalty seconds.)
+          </p>
+        </div>
+
         <ScoreSave />
-        <h2>Results</h2>
-        <p>
-          You completed the game in {resultsTime} seconds! (Including {penaltyTime} penalty seconds)
-        </p>
+
         <button className="begin-button" onClick={() => dispatch({ type: "start_new_game" })}>
           Start New Game
         </button>
 
         <HighScoreTable />
-      </div>
+      </main>
     </>
   );
 };

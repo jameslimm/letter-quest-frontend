@@ -1,8 +1,11 @@
-# React + Vite
+# Letter Quest [Live Link](https://www.letterquest.xyz)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+https://www.letterquest.xyx
 
-Currently, two official plugins are available:
+A Javascript + React based game for teaching spelling and keyboard skills to children.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Extensive use of hooks throughout for state management (useReducer + useContext) and data loading + stopwatch function (useEffect). Implements a high score system in conjunction with a back-end API (with MySQL for data storage).
+
+Styled with vanilla CSS (no pre-processor), with use of loaded web fonts and keyframe animation.
+
+The software is written in VS Code, bootstrapped and compiled using Vite. Hosted via a standard VPS (HostPresto).

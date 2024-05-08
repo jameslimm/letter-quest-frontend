@@ -24,7 +24,7 @@ const Game = () => {
       <main>
         <div className="game-header">
           <Timer />
-          <h1 class="logo-title">Letter Quest</h1>
+          <h1 className="logo-title">Letter Quest</h1>
           <button onClick={() => dispatch({ type: "set_game_status", gameStatus: 0 })}>
             Go Back
           </button>
